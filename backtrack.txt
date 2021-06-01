@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class BalancedParens {
+    public static List <String> balancedParens (int n) {
+        // your code here
+        List<String> ll = new ArrayList();
+      backtrack(ll,"",0,0,n);
+        return ll;
+    }
+  public static void backtrack(List<String> ll, String c,int open,int close,int max){
+    if(c.length()==max*2){
+      ll.add(c);
+      return ;
+    }
+    if(open<max){
+      backtrack(ll,c+"(",open+1,close,max);
+    }
+    if(close<open){
+      backtrack(ll,c+")",open,close+1,max);
+    }
+  }

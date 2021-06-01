@@ -1,0 +1,49 @@
+<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define endl "\n"
+#define boost ios_base::sync_with_stdio(false);   cin.tie(NULL);   cout.tie(NULL);
+
+int main() {
+    boost
+ int t;
+ cin>>t;
+ while(t-->0){
+     ll n;
+     cin>>n;
+     vector<pair<double,double> > arr(n),arr1;
+     for(int i=0;i<n;i++){
+         double x;
+         cin>>x;
+         double r=(double)(i+1);
+         arr[i]={r,x};
+     }
+     if(n==2){
+         cout<<"1\n";
+         continue;
+     }
+            arr1.push_back(arr[0]);
+     arr1.push_back(arr[1]);
+     int mx=1;
+     int x=arr1.size();
+     for(int i=2;i<n;i++){
+         while(arr1.size()>=2){
+             double slope1=(arr1[x-1].second-arr1[x-2].second)/(arr1[x-1].first-arr1[x-2].first);
+             double slope2=(arr[i].second-arr1[x-2].second)/(arr[i].first-arr1[x-2].first);
+             if(slope1<=slope2){
+                 x--;
+                 arr1.pop_back();
+             }
+             else{
+                 break;
+             }
+         }
+         x++;
+         arr1.push_back(arr[i]);
+         int  r=arr1[x-1].first-arr1[x-2].first;
+         mx=max(mx,r);
+     }
+     cout<<mx<<endl;
+ }
+ return 0;
+}
