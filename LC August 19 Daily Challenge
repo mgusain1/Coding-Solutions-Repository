@@ -1,0 +1,46 @@
+class Solution {
+public:
+
+bool isPrime(int N) {
+  
+    // If the number is less than or equal to 1, it is not
+    // prime
+    if (N <= 1) {
+        return false;
+    }
+
+    // Check for divisors from 2 to N-1
+    for (int i = 2; i < N; i++) {
+      
+        // If N is divisible by any number in this range, it
+        // is not prime
+        if (N % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+ int lets(int n) {
+        if (n == 1) return 0;
+        int minSteps = INT_MAX;
+        for (int i = 2; i <= n / i; ++i) {
+            if (n % i == 0) {
+                int factor = i;
+                minSteps = min(minSteps, lets(n / factor) + factor);
+            }
+        }
+        if (isPrime(n)) {
+            return n;
+        }
+
+        return minSteps;
+    }
+
+
+    int minSteps(int n) {
+        if(n==1) return 0;
+        return lets(n);
+        
+    }
+};
