@@ -1,0 +1,22 @@
+class Solution {
+public:
+int lets(string org,string res, int i, int j,vector<vector<int>> &dp)
+{
+    if(i>=org.size()) return res.size()-j;
+    if(j>=res.size()) return org.size()-i;
+    if(dp[i][j]!=0) return dp[i][j];
+    if(org[i]==res[j]) dp[i][j] = lets(org,res,i+1,j+1,dp);
+    else{
+        int replace = lets(org,res,i+1,j+1,dp);
+        int delet = lets(org,res,i+1,j,dp);
+        int insert = lets(org,res,i,j+1,dp);
+        dp[i][j] = 1+min({replace,delet,insert});
+    }
+    return dp[i][j];
+}
+
+    int minDistance(string word1, string word2) {
+        vector<vector<int>> dp(word1.size(),vector<int>(word2.size(),0));
+        return lets(word1,word2,0,0,dp);
+    }
+};
